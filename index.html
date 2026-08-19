@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LNBP Advanced Stats — Temporada 2026</title>
+<title>LNBP Advanced Stats — 2026 Season</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -29,10 +29,8 @@ body{background:var(--campo);color:var(--ink);font-family:'Manrope',system-ui,sa
 .marca h1 em{font-style:normal;color:#8FA9CE}
 .marca .liga{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.18em;
   text-transform:uppercase;color:#8FA9CE;border:1px solid #2C3A4D;padding:3px 7px;border-radius:var(--r)}
-.resumen{margin-left:auto;display:flex;gap:20px}
-.resumen div{text-align:right}
-.resumen b{display:block;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700}
-.resumen span{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:#77879C}
+.credito{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.11em;text-transform:uppercase;color:#77879C;text-align:right}
 
 .tabs{background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
 .tabs .wrap{display:flex;gap:2px;overflow-x:auto}
@@ -94,6 +92,9 @@ tbody tr:hover td{background:#F7F8FA}
   background:#EEF1F6;border:1px solid var(--line-2);border-radius:2px;padding:2px 5px}
 .rol{font-family:'Manrope',sans-serif;font-size:10.5px;font-weight:600;color:#4A5568;
   background:#F1F3F7;border-radius:2px;padding:2px 6px;white-space:nowrap}
+.forma{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--azul);
+  background:#EEF1F6;border-radius:2px;padding:2px 7px}
+.advert{font-family:'JetBrains Mono',monospace;font-size:10px;color:#9A6B10;margin-left:5px}
 
 .pm{padding:5px 7px !important}
 .pm .env{display:flex;align-items:center;justify-content:flex-end;gap:9px}
@@ -149,7 +150,7 @@ svg{display:block;width:100%;height:auto}
 @media (max-width:900px){ .rejilla{grid-template-columns:1fr} }
 @media (max-width:720px){
   .marca h1{font-size:28px}
-  .resumen{width:100%;margin-left:0;justify-content:space-between;gap:10px}
+  .credito{width:100%;margin-left:0;text-align:left;font-size:9px}
   .quinteto{max-width:200px}
   .ficha .mets{margin-left:0;width:100%;justify-content:space-between}
 }
@@ -160,111 +161,105 @@ svg{display:block;width:100%;height:auto}
 
 <header class="masthead">
   <div class="wrap">
-    <div class="marca"><h1>LNBP <em>Advanced Stats</em></h1><span class="liga">Temporada 2026</span></div>
-    <div class="resumen">
-      <div><b id="rJuegos">—</b><span>Juegos</span></div>
-      <div><b id="rEquipos">—</b><span>Equipos</span></div>
-      <div><b id="rJugadores">—</b><span>Jugadores</span></div>
-      <div><b id="rQuintetos">—</b><span>Quintetos</span></div>
-    </div>
+    <div class="marca"><h1>LNBP <em>Advanced Stats</em></h1><span class="liga">2026 Season</span></div>
+    <div class="credito">Juan Pablo Bañuelos Mendoza · Scout &amp; Data Analyst</div>
   </div>
 </header>
 
 <nav class="tabs" role="tablist">
   <div class="wrap">
-    <button class="tab" role="tab" data-vista="liga" aria-selected="true">Liga</button>
-    <button class="tab" role="tab" data-vista="equipos" aria-selected="false">Equipos</button>
-    <button class="tab" role="tab" data-vista="ficha" aria-selected="false">Ficha de equipo</button>
-    <button class="tab" role="tab" data-vista="jugadores" aria-selected="false">Jugadores</button>
-    <button class="tab" role="tab" data-vista="quintetos" aria-selected="false">Quintetos</button>
-    <button class="tab" role="tab" data-vista="juegos" aria-selected="false">Juegos</button>
+    <button class="tab" role="tab" data-vista="liga" aria-selected="true">League</button>
+    <button class="tab" role="tab" data-vista="equipos" aria-selected="false">Teams</button>
+    <button class="tab" role="tab" data-vista="ficha" aria-selected="false">Team Page</button>
+    <button class="tab" role="tab" data-vista="jugadores" aria-selected="false">Players</button>
+    <button class="tab" role="tab" data-vista="quintetos" aria-selected="false">Lineups</button>
   </div>
 </nav>
 
 <section class="filtros">
   <div class="wrap">
     <div class="campo" id="campoTipo">
-      <label for="fTipo">Tipo</label>
-      <select id="fTipo"><option value="trad">Tradicional</option><option value="adv">Avanzado</option></select>
+      <label for="fTipo">Table view</label>
+      <select id="fTipo"><option value="trad">Traditional</option><option value="adv">Advanced</option><option value="roles">Roles</option></select>
     </div>
     <div class="campo">
-      <label for="fEquipo">Equipo</label>
-      <select id="fEquipo"><option value="">Todos</option></select>
+      <label for="fEquipo">Team</label>
+      <select id="fEquipo"><option value="">All</option></select>
     </div>
     <div class="campo" id="campoRival">
-      <label for="fRival">Rival</label>
-      <select id="fRival"><option value="">Todos</option></select>
+      <label for="fRival">Opponent</label>
+      <select id="fRival"><option value="">All</option></select>
     </div>
     <div class="campo" id="campoRol">
-      <label for="fRol">Rol ofensivo</label>
-      <select id="fRol"><option value="">Todos</option></select>
+      <label for="fRol">Offensive role</label>
+      <select id="fRol"><option value="">All</option></select>
     </div>
     <div class="campo" id="campoModo">
-      <label for="fModo">Presentación</label>
+      <label for="fModo">Per mode</label>
       <select id="fModo">
-        <option value="juego">Por juego</option>
-        <option value="total">Totales</option>
-        <option value="40">Por 40 min</option>
-        <option value="100">Por 100 posesiones</option>
+        <option value="juego">Per game</option>
+        <option value="total">Totals</option>
+        <option value="40">Per 40 min</option>
+        <option value="100">Per 100 possessions</option>
       </select>
     </div>
     <div class="campo" id="campoSede">
-      <label for="fSede">Sede</label>
-      <select id="fSede"><option value="">Casa y visita</option><option value="1">Solo casa</option><option value="0">Solo visita</option></select>
+      <label for="fSede">Location</label>
+      <select id="fSede"><option value="">Home &amp; away</option><option value="1">Home only</option><option value="0">Away only</option></select>
     </div>
     <div class="campo" id="campoRes">
-      <label for="fResultado">Resultado</label>
-      <select id="fResultado"><option value="">Todos</option><option value="W">Victorias</option><option value="L">Derrotas</option></select>
+      <label for="fResultado">Outcome</label>
+      <select id="fResultado"><option value="">All</option><option value="W">Wins</option><option value="L">Losses</option></select>
     </div>
     <div class="campo" id="campoUlt">
-      <label for="fUltimos">Últimos N juegos</label>
-      <select id="fUltimos"><option value="">Toda la temporada</option><option value="3">Últimos 3</option><option value="5">Últimos 5</option><option value="10">Últimos 10</option></select>
+      <label for="fUltimos">Last N games</label>
+      <select id="fUltimos"><option value="">Full season</option><option value="3">Last 3</option><option value="5">Last 5</option><option value="10">Last 10</option></select>
     </div>
-    <div class="campo" id="campoDesde"><label for="fDesde">Desde</label><input type="date" id="fDesde"></div>
-    <div class="campo" id="campoHasta"><label for="fHasta">Hasta</label><input type="date" id="fHasta"></div>
+    <div class="campo" id="campoDesde"><label for="fDesde">From</label><input type="date" id="fDesde"></div>
+    <div class="campo" id="campoHasta"><label for="fHasta">To</label><input type="date" id="fHasta"></div>
     <div class="campo" id="campoCalidad">
-      <label for="fCalidad">Calidad de datos</label>
+      <label for="fCalidad">Data quality</label>
       <select id="fCalidad">
-        <option value="">Todos los juegos</option>
-        <option value="1">Solo juegos completos</option>
+        <option value="">All games</option>
+        <option value="1">Complete games only</option>
       </select>
     </div>
     <div class="campo" id="campoMinJ">
-      <label for="fMinJ">Mínimo de juegos</label>
+      <label for="fMinJ">Min. games</label>
       <select id="fMinJ">
-        <option value="0">Sin mínimo</option><option value="3">3 o más</option>
-        <option value="5" selected>5 o más</option><option value="8">8 o más</option><option value="10">10 o más</option>
+        <option value="0">No minimum</option><option value="3">3 or more</option>
+        <option value="5" selected>5 or more</option><option value="8">8 or more</option><option value="10">10 or more</option>
       </select>
     </div>
     <div class="campo" id="campoMin">
-      <label for="fMin">Mínimo de minutos</label>
+      <label for="fMin">Min. minutes</label>
       <input type="number" id="fMin" value="0" min="0" step="5">
     </div>
-    <button class="reset" id="bReset">Limpiar filtros</button>
+    <button class="reset" id="bReset">Clear filters</button>
   </div>
 </section>
 
 <main class="wrap" id="lienzo">
   <div class="panel" id="panelTabla">
     <div class="panel-top">
-      <h2 id="titulo">Liga</h2>
+      <h2 id="titulo">League</h2>
       <div class="pag">
         <span id="conteo"></span>
-        <button id="bPrev" aria-label="Página anterior">&lsaquo;</button>
-        <span>Página</span>
+        <button id="bPrev" aria-label="Previous page">&lsaquo;</button>
+        <span>Page</span>
         <select id="fPagina"></select>
         <span id="dePag"></span>
-        <button id="bNext" aria-label="Página siguiente">&rsaquo;</button>
+        <button id="bNext" aria-label="Next page">&rsaquo;</button>
       </div>
     </div>
-    <div class="scroll" id="salida"><div class="cargando">Cargando datos de la temporada…</div></div>
+    <div class="scroll" id="salida"><div class="cargando">Loading season data…</div></div>
     <div class="aviso" id="aviso" hidden></div>
   </div>
   <div id="libre"></div>
 </main>
 
 <footer style="padding:26px 16px;text-align:center;font-size:11px;color:var(--ink-2)">
-  Quintetos reconstruidos desde el play-by-play oficial de la LNBP y validados contra el box score<br>
+  Lineups reconstructed from official LNBP play-by-play and validated against the official box score<br>
   <b style="color:var(--ink)">Juan Pablo Bañuelos Mendoza</b> — Scout &amp; Data Analyst · <span id="pieFecha"></span>
 </footer>
 
@@ -288,6 +283,17 @@ const ent = v => isFinite(v) ? Math.round(v) : '—';
 const firma = v => !isFinite(v) ? '—' : (v > 0 ? '+' : '') + (Math.round(v*10)/10).toFixed(1);
 const div = (a,b) => b > 0 ? a/b : NaN;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* los 11 roles se agrupan en tres familias de posición */
+function familia(rol){
+  if(!rol) return '';
+  const r = rol.toLowerCase();
+  if(r.includes('ball handler')) return 'Guard';
+  if(r.includes('wing')) return 'Wing';
+  if(r.includes('big')) return 'Big';
+  return 'Other';
+}
+const SIGLA = {Guard:'G', Wing:'W', Big:'B'};
 
 /* celda de +/-: barra divergente desde el cero, con el número aparte */
 function celdaPM(valor, max){
@@ -333,11 +339,7 @@ function prepara(meta){
     S.eqJuego[k].tov += r.pe; S.eqJuego[k].min += r.minutos;
   });
 
-  rJuegos.textContent = meta.juegos.length;
-  rEquipos.textContent = meta.equipos.length;
-  rJugadores.textContent = new Set(S.jugadores.filter(r => r.minutos > 0).map(r => r.jugador)).size;
-  rQuintetos.textContent = new Set(S.quintetos.map(r => r.equipo + r.lineup)).size;
-  pieFecha.textContent = 'Datos al ' + meta.actualizado;
+  pieFecha.textContent = 'Data through ' + meta.actualizado;
 
   const op = S.equipos.map(e => `<option value="${e.code}">${esc(e.nombre)}</option>`).join('');
   fEquipo.insertAdjacentHTML('beforeend', op);
@@ -419,8 +421,30 @@ function datosEquipos(filasBase){
       orebp:div(t.oreb, t.oreb+to.dreb)*100, drebp:div(t.dreb, t.dreb+to.oreb)*100,
       rebp:div(t.reb, t.reb+to.reb)*100, tovp:div(t.tov,pos)*100,
       efg:div(t.fgm+0.5*t.tpm, t.fga)*100, ts:div(t.pts, 2*(t.fga+0.44*t.fta))*100,
-      pace:div(pos,g)};
+      pace:div(pos,g),
+      ...repartoRoles(rs, eq)};
   });
+}
+
+/* qué proporción de los minutos de un equipo va a cada familia, y con qué eficiencia */
+function repartoRoles(filas, eq){
+  const fam = {Guard:{min:0, pts:0, fga:0, fta:0}, Wing:{min:0, pts:0, fga:0, fta:0},
+               Big:{min:0, pts:0, fga:0, fta:0}};
+  let total = 0, conRol = 0;
+  filas.forEach(r => {
+    total += r.minutos;
+    const f = familia(S.roles[eq+'|'+r.jugador]);
+    if(!fam[f]) return;
+    conRol += r.minutos;
+    fam[f].min += r.minutos; fam[f].pts += r.pts;
+    fam[f].fga += r.ti; fam[f].fta += r.tli;
+  });
+  const o = {minSinRol: total - conRol};
+  for(const f in fam){
+    o['min' + f] = div(fam[f].min, total) * 100;
+    o['ts' + f] = div(fam[f].pts, 2*(fam[f].fga + 0.44*fam[f].fta)) * 100;
+  }
+  return o;
 }
 
 function datosJugadores(filasBase){
@@ -438,7 +462,8 @@ function datosJugadores(filasBase){
       if(q){ jugEq += q.fga + 0.44*q.fta + q.tov; minEq += q.min; }
     });
     const jug = t.fga + 0.44*t.fta + t.tov;
-    return {equipo:eq, jugador:nombre, rol:S.roles[k] || '', gp:g, tit:rs.filter(r => r.titular).length,
+    const rolJ = S.roles[k] || '';
+    return {equipo:eq, jugador:nombre, rol:rolJ, fam:familia(rolJ), gp:g, tit:rs.filter(r => r.titular).length,
       minTot:t.minutos, min:e.minutos,
       pts:e.pts, fgm:e.fgm, fga:e.fga, fgp:div(t.fgm,t.fga)*100,
       tpm:e.tpm, tpa:e.tpa, tpp:div(t.tpm,t.tpa)*100,
@@ -450,6 +475,22 @@ function datosJugadores(filasBase){
       tpar:div(t.tpa,t.fga)*100, ftr:div(t.fta,t.fga)*100, astto:div(t.ast,t.tov),
       pm40:div(t.plus_minus, t.minutos)*40};
   }).filter(r => r.minTot >= minMin && r.gp >= minJ && (!rolF || r.rol === rolF));
+}
+
+/* promedios por rol, para medir a cada jugador contra su propio arquetipo */
+function promediosPorRol(lista){
+  const acc = {};
+  lista.forEach(j => {
+    if(!j.rol) return;
+    (acc[j.rol] ||= {ts:[], usg:[], tpar:[]});
+    if(isFinite(j.ts)) acc[j.rol].ts.push(j.ts);
+    if(isFinite(j.usg)) acc[j.rol].usg.push(j.usg);
+    if(isFinite(j.tpar)) acc[j.rol].tpar.push(j.tpar);
+  });
+  const med = a => a.length ? a.reduce((x,y) => x+y, 0)/a.length : NaN;
+  const out = {};
+  for(const r in acc) out[r] = {ts:med(acc[r].ts), usg:med(acc[r].usg), tpar:med(acc[r].tpar)};
+  return out;
 }
 
 function datosQuintetos(filasBase){
@@ -486,8 +527,19 @@ function datosQuintetos(filasBase){
       orebp:div(q.oreb, q.oreb+q.opp_dreb)*100, drebp:div(q.dreb, q.dreb+q.opp_oreb)*100,
       rebp:div(q.reb, q.reb+oppReb)*100,
       efg:div(q.fgm+0.5*q.tpm,q.fga)*100, ts:div(q.pts, 2*(q.fga+0.44*q.fta))*100,
-      pace:div(pos, q.minutos/40)};
+      pace:div(pos, q.minutos/40),
+      forma:composicion(q.equipo, q.lineup), sinRol:sinRol(q.equipo, q.lineup)};
   }).filter(q => q.minTot >= minMin);
+}
+
+/* composición del quinteto en bases / aleros / interiores, tipo 2-2-1 */
+function composicion(eq, lineup){
+  const c = {Guard:0, Wing:0, Big:0};
+  lineup.split(' | ').forEach(n => { const f = familia(S.roles[eq+'|'+n]); if(c[f] !== undefined) c[f]++; });
+  return `${c.Guard}-${c.Wing}-${c.Big}`;
+}
+function sinRol(eq, lineup){
+  return lineup.split(' | ').filter(n => !S.roles[eq+'|'+n]).length;
 }
 
 function datosJuegos(){
@@ -503,53 +555,73 @@ function datosJuegos(){
 }
 
 /* ---------- columnas ---------- */
-const eqCol  = {k:'equipo', t:'EQ', txt:1, f:v => `<span class="equipo eqlink" data-eq="${v}">${v}</span>`};
-const linCol = {k:'lineup', t:'Quinteto', txt:1,
+const eqCol  = {k:'equipo', t:'TEAM', txt:1, f:v => `<span class="equipo eqlink" data-eq="${v}">${v}</span>`};
+const linCol = {k:'lineup', t:'Lineup', txt:1,
   f:v => `<div class="quinteto">${v.split(' | ').map(p => `<span>${esc(p)}</span>`).join('')}</div>`};
-const nomCol = {k:'nombre', t:'Equipo', txt:1,
+const nomCol = {k:'nombre', t:'Team', txt:1,
   f:(v,r) => `<span class="equipo eqlink" data-eq="${r.equipo}">${r.equipo}</span> ${esc(v)}`};
-const rolCol = {k:'rol', t:'Rol ofensivo', txt:1, f:v => v ? `<span class="rol">${esc(v)}</span>` : '—'};
+const rolCol = {k:'rol', t:'Offensive role', txt:1, f:v => v ? `<span class="rol">${esc(v)}</span>` : '—'};
 
 const TRAD = [
   {k:'min', t:'MIN', f:n1},
   {k:'pts', t:'PTS', f:n1, heat:1},
-  {k:'fgm', t:'TCC', f:n1, dato:1}, {k:'fga', t:'TCI', f:n1, dato:1}, {k:'fgp', t:'TC%', f:n1},
-  {k:'tpm', t:'3PC', f:n1, dato:1}, {k:'tpa', t:'3PI', f:n1, dato:1}, {k:'tpp', t:'3P%', f:n1},
-  {k:'ftm', t:'TLC', f:n1}, {k:'fta', t:'TLI', f:n1}, {k:'ftp', t:'TL%', f:n1},
-  {k:'oreb', t:'RO', f:n1, dato:1}, {k:'dreb', t:'RD', f:n1, dato:1}, {k:'reb', t:'REB', f:n1},
-  {k:'ast', t:'AST', f:n1, dato:1}, {k:'tov', t:'PER', f:n1, dato:1},
-  {k:'stl', t:'ROB', f:n1, dato:1}, {k:'blk', t:'TAP', f:n1, dato:1},
-  {k:'pf', t:'FC', f:n1}, {k:'pm', t:'+/-', pm:1},
+  {k:'fgm', t:'FGM', f:n1, dato:1}, {k:'fga', t:'FGA', f:n1, dato:1}, {k:'fgp', t:'FG%', f:n1},
+  {k:'tpm', t:'3PM', f:n1, dato:1}, {k:'tpa', t:'3PA', f:n1, dato:1}, {k:'tpp', t:'3P%', f:n1},
+  {k:'ftm', t:'FTM', f:n1}, {k:'fta', t:'FTA', f:n1}, {k:'ftp', t:'FT%', f:n1},
+  {k:'oreb', t:'OREB', f:n1, dato:1}, {k:'dreb', t:'DREB', f:n1, dato:1}, {k:'reb', t:'REB', f:n1},
+  {k:'ast', t:'AST', f:n1, dato:1}, {k:'tov', t:'TOV', f:n1, dato:1},
+  {k:'stl', t:'STL', f:n1, dato:1}, {k:'blk', t:'BLK', f:n1, dato:1},
+  {k:'pf', t:'PF', f:n1}, {k:'pm', t:'+/-', pm:1},
 ];
 
 const AVANZADO = [
   {k:'ortg', t:'ORtg', f:n1, heat:1}, {k:'drtg', t:'DRtg', f:n1, heat:-1},
   {k:'net', t:'NetRtg', f:firma, heat:1},
-  {k:'astp', t:'AST%', f:n1}, {k:'astto', t:'AST/PER', f:n2},
-  {k:'orebp', t:'RO%', f:n1}, {k:'drebp', t:'RD%', f:n1}, {k:'rebp', t:'REB%', f:n1},
-  {k:'efg', t:'eFG%', f:n1, heat:1}, {k:'ts', t:'TS%', f:n1, heat:1}, {k:'pace', t:'Ritmo', f:n1},
+  {k:'astp', t:'AST%', f:n1}, {k:'astto', t:'AST/TO', f:n2},
+  {k:'orebp', t:'OREB%', f:n1}, {k:'drebp', t:'DREB%', f:n1}, {k:'rebp', t:'REB%', f:n1},
+  {k:'efg', t:'eFG%', f:n1, heat:1}, {k:'ts', t:'TS%', f:n1, heat:1}, {k:'pace', t:'PACE', f:n1},
 ];
+
+const famCol = {k:'fam', t:'Family', txt:1, f:v => v ? `<span class="rol">${esc(v)}</span>` : '—'};
+const formaCol = {k:'forma', t:'G-W-B', txt:1,
+  f:(v,r) => `<span class="forma">${v}</span>${r.sinRol ? `<span class="advert" title="players with no assigned role">${r.sinRol}?</span>` : ''}`};
 
 const COLS = {
   equipos:{
-    trad:[nomCol, {k:'gp', t:'J'}, {k:'w', t:'G'}, {k:'l', t:'P'}, {k:'win', t:'%G', f:n3}].concat(TRAD),
-    adv:[nomCol, {k:'gp', t:'J'}, {k:'w', t:'G'}, {k:'l', t:'P'}, {k:'win', t:'%G', f:n3},
-      {k:'min', t:'MIN', f:n1}].concat(AVANZADO).concat([{k:'tovp', t:'PER%', f:n1, heat:-1}]),
+    trad:[nomCol, {k:'gp', t:'GP'}, {k:'w', t:'W'}, {k:'l', t:'L'}, {k:'win', t:'WIN%', f:n3}].concat(TRAD),
+    adv:[nomCol, {k:'gp', t:'GP'}, {k:'w', t:'W'}, {k:'l', t:'L'}, {k:'win', t:'WIN%', f:n3},
+      {k:'min', t:'MIN', f:n1}].concat(AVANZADO).concat([{k:'tovp', t:'TOV%', f:n1, heat:-1}]),
+    roles:[nomCol, {k:'gp', t:'GP'}, {k:'w', t:'W'}, {k:'l', t:'L'},
+      {k:'minBase', t:'GUARD MIN%', f:n1, heat:1}, {k:'tsBase', t:'GUARD TS%', f:n1},
+      {k:'minAlero', t:'WING MIN%', f:n1, heat:1}, {k:'tsAlero', t:'WING TS%', f:n1},
+      {k:'minInterior', t:'BIG MIN%', f:n1, heat:1}, {k:'tsInterior', t:'BIG TS%', f:n1},
+      {k:'minSinRol', t:'UNCLASSIFIED MIN', f:ent},
+      {k:'ortg', t:'ORtg', f:n1, heat:1}, {k:'net', t:'NetRtg', f:firma, heat:1}],
   },
   jugadores:{
-    trad:[{k:'jugador', t:'Jugador', txt:1}, eqCol, rolCol, {k:'gp', t:'J'}, {k:'tit', t:'TIT'},
-      {k:'minTot', t:'MIN TOT', f:ent}].concat(TRAD),
-    adv:[{k:'jugador', t:'Jugador', txt:1}, eqCol, rolCol, {k:'gp', t:'J'},
-      {k:'minTot', t:'MIN TOT', f:ent}, {k:'min', t:'MIN', f:n1},
-      {k:'usg', t:'USO%', f:n1, heat:1}, {k:'ts', t:'TS%', f:n1, heat:1}, {k:'efg', t:'eFG%', f:n1, heat:1},
-      {k:'tpar', t:'3PI/TCI', f:n1}, {k:'ftr', t:'TLI/TCI', f:n1}, {k:'astto', t:'AST/PER', f:n2},
+    trad:[{k:'jugador', t:'Player', txt:1}, eqCol, rolCol, {k:'gp', t:'GP'}, {k:'tit', t:'GS'},
+      {k:'minTot', t:'TOT MIN', f:ent}].concat(TRAD),
+    adv:[{k:'jugador', t:'Player', txt:1}, eqCol, rolCol, {k:'gp', t:'GP'},
+      {k:'minTot', t:'TOT MIN', f:ent}, {k:'min', t:'MIN', f:n1},
+      {k:'usg', t:'USG%', f:n1, heat:1}, {k:'ts', t:'TS%', f:n1, heat:1}, {k:'efg', t:'eFG%', f:n1, heat:1},
+      {k:'tpar', t:'3PAr', f:n1}, {k:'ftr', t:'FTr', f:n1}, {k:'astto', t:'AST/TO', f:n2},
       {k:'pm', t:'+/-', pm:1}, {k:'pm40', t:'+/- x40', f:n1, heat:1}],
+    roles:[{k:'jugador', t:'Player', txt:1}, eqCol, rolCol, famCol,
+      {k:'gp', t:'GP'}, {k:'minTot', t:'TOT MIN', f:ent},
+      {k:'usg', t:'USG%', f:n1}, {k:'usgDif', t:'USG% VS ROLE', f:firma, heat:1},
+      {k:'ts', t:'TS%', f:n1}, {k:'tsDif', t:'TS% VS ROLE', f:firma, heat:1},
+      {k:'tpar', t:'3PAr', f:n1}, {k:'tparDif', t:'3PAr VS ROLE', f:firma},
+      {k:'pm40', t:'+/- x40', f:n1, heat:1}],
   },
   quintetos:{
-    trad:[linCol, eqCol, {k:'gp', t:'J'}, {k:'stints', t:'TRAMOS'},
-      {k:'minTot', t:'MIN TOT', f:n1}].concat(TRAD),
-    adv:[linCol, eqCol, {k:'gp', t:'J'}, {k:'minTot', t:'MIN TOT', f:n1}].concat(AVANZADO)
+    trad:[linCol, eqCol, {k:'gp', t:'GP'}, {k:'stints', t:'STINTS'},
+      {k:'minTot', t:'TOT MIN', f:n1}].concat(TRAD),
+    adv:[linCol, eqCol, {k:'gp', t:'GP'}, {k:'minTot', t:'TOT MIN', f:n1}].concat(AVANZADO)
       .concat([{k:'pm', t:'+/-', pm:1}]),
+    roles:[linCol, eqCol, formaCol, {k:'gp', t:'GP'}, {k:'minTot', t:'TOT MIN', f:n1},
+      {k:'ortg', t:'ORtg', f:n1, heat:1}, {k:'drtg', t:'DRtg', f:n1, heat:-1},
+      {k:'net', t:'NetRtg', f:firma, heat:1}, {k:'efg', t:'eFG%', f:n1, heat:1},
+      {k:'rebp', t:'REB%', f:n1}, {k:'pace', t:'PACE', f:n1}, {k:'pm', t:'+/-', pm:1}],
   },
   juegos:{
     trad:[{k:'fecha', t:'Fecha', txt:1},
@@ -559,15 +631,16 @@ const COLS = {
       {k:'pts_visita', t:'PTS'},
       {k:'ganador', t:'Ganador', txt:1, f:v => `<span class="equipo">${v}</span>`},
       {k:'margen', t:'Margen'}, {k:'total', t:'Total'},
-      {k:'cob', t:'Quintetos', f:v => v >= 99.5
-        ? '<span class="ok">completo</span>'
+      {k:'cob', t:'Lineups', f:v => v >= 99.5
+        ? '<span class="ok">complete</span>'
         : `<span class="parcial">${Math.round(v)}%</span>`}],
   },
 };
 COLS.juegos.adv = COLS.juegos.trad;
+COLS.juegos.roles = COLS.juegos.trad;
 
-const TITULOS = {liga:'Panorama de la liga', equipos:'Equipos', ficha:'Ficha de equipo',
-  jugadores:'Jugadores', quintetos:'Quintetos', juegos:'Juegos'};
+const TITULOS = {liga:'League Overview', equipos:'Teams', ficha:'Team Page',
+  jugadores:'Players', quintetos:'Lineups'};
 
 /* ---------- panorama de la liga ---------- */
 function pintarLiga(){
@@ -594,19 +667,19 @@ function pintarLiga(){
   const marcasY = [...Array(5)].map((_,i) => y0 + (y1-y0)*i/4);
 
   const svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img"
-      aria-label="Dispersión de eficiencia ofensiva contra defensiva por equipo">
+      aria-label="Scatter plot of offensive versus defensive efficiency by team">
     <line class="guia" x1="${px(mx)}" y1="${M.t}" x2="${px(mx)}" y2="${H-M.b}"/>
     <line class="guia" x1="${M.l}" y1="${py(my)}" x2="${W-M.r}" y2="${py(my)}"/>
-    <text class="cuad" x="${W-M.r-4}" y="${M.t+12}" text-anchor="end">ATACA Y DEFIENDE BIEN</text>
-    <text class="cuad" x="${M.l+4}" y="${M.t+12}">DEFIENDE BIEN, NO ANOTA</text>
-    <text class="cuad" x="${W-M.r-4}" y="${H-M.b-6}" text-anchor="end">ANOTA, NO DEFIENDE</text>
-    <text class="cuad" x="${M.l+4}" y="${H-M.b-6}">NI ATACA NI DEFIENDE</text>
+    <text class="cuad" x="${W-M.r-4}" y="${M.t+12}" text-anchor="end">SCORES AND STOPS</text>
+    <text class="cuad" x="${M.l+4}" y="${M.t+12}">STOPS, CAN'T SCORE</text>
+    <text class="cuad" x="${W-M.r-4}" y="${H-M.b-6}" text-anchor="end">SCORES, CAN'T STOP</text>
+    <text class="cuad" x="${M.l+4}" y="${H-M.b-6}">NEITHER</text>
     ${marcasX.map(v => `<text class="ejeTxt" x="${px(v).toFixed(1)}" y="${H-M.b+16}" text-anchor="middle">${n1(v)}</text>`).join('')}
     ${marcasY.map(v => `<text class="ejeTxt" x="${M.l-8}" y="${(py(v)+3).toFixed(1)}" text-anchor="end">${n1(v)}</text>`).join('')}
     <line class="eje" x1="${M.l}" y1="${H-M.b}" x2="${W-M.r}" y2="${H-M.b}"/>
     <line class="eje" x1="${M.l}" y1="${M.t}" x2="${M.l}" y2="${H-M.b}"/>
-    <text class="ejeTxt" x="${(M.l+W-M.r)/2}" y="${H-8}" text-anchor="middle">EFICIENCIA OFENSIVA (PUNTOS POR 100 POSESIONES) →</text>
-    <text class="ejeTxt" x="${-(M.t+H-M.b)/2}" y="14" text-anchor="middle" transform="rotate(-90)">← MEJOR DEFENSA</text>
+    <text class="ejeTxt" x="${(M.l+W-M.r)/2}" y="${H-8}" text-anchor="middle">OFFENSIVE RATING (POINTS PER 100 POSSESSIONS) →</text>
+    <text class="ejeTxt" x="${-(M.t+H-M.b)/2}" y="14" text-anchor="middle" transform="rotate(-90)">← BETTER DEFENSE</text>
     ${ptos}
   </svg>`;
 
@@ -634,34 +707,34 @@ function pintarLiga(){
   libre.innerHTML = `
     <div class="rejilla">
       <div class="caja">
-        <h3>Quién ataca y quién defiende</h3>
+        <h3>Who scores and who stops</h3>
         <div class="cuerpo">${svg}</div>
-        <p class="leyenda">Cada burbuja es un equipo; el tamaño del color marca su diferencial neto.
-          Las líneas punteadas son el promedio de la liga. Arriba a la derecha viven los equipos completos.</p>
+        <p class="leyenda">Each bubble is a team; colour intensity marks net rating. Dashed lines are the league average.
+          The complete teams live in the top-right quadrant.</p>
       </div>
       <div>
         <div class="caja">
-          <h3>Mejor ataque · puntos por 100 posesiones</h3>
+          <h3>Best offense · points per 100 possessions</h3>
           <div class="cuerpo">${barra(eqs, 'ortg', n1, false)}</div>
         </div>
         <div class="caja" style="margin-top:16px">
-          <h3>Mejor defensa · puntos permitidos por 100</h3>
+          <h3>Best defense · points allowed per 100</h3>
           <div class="cuerpo">${barra(eqs, 'drtg', n1, true)}</div>
         </div>
       </div>
     </div>
     <div class="rejilla">
       <div class="caja">
-        <h3>Ritmo de juego · posesiones por partido</h3>
+        <h3>Pace · possessions per game</h3>
         <div class="cuerpo">${barra(eqs, 'pace', n1, false)}</div>
       </div>
       <div class="caja">
-        <h3>Arquetipos ofensivos de la liga</h3>
+        <h3>Offensive archetypes across the league</h3>
         <div class="scroll" style="max-height:none">
-          <table><thead><tr><th class="txt">Rol</th><th>Jugadores</th><th>USO%</th><th>TS%</th></tr></thead>
+          <table><thead><tr><th class="txt">Role</th><th>Players</th><th>USG%</th><th>TS%</th></tr></thead>
           <tbody>${filasRol}</tbody></table>
         </div>
-        <p class="leyenda">Clasificación propia de los 145 jugadores con rol asignado, con su uso y eficiencia promedio.</p>
+        <p class="leyenda">Proprietary classification of the 145 players with an assigned role, with average usage and efficiency.</p>
       </div>
     </div>`;
 }
@@ -671,11 +744,11 @@ function pintarFicha(){
   const eq = fEquipo.value;
   if(!eq){
     libre.innerHTML = `<div class="panel"><div class="selector">
-      Elige un equipo en el filtro <b>Equipo</b> para ver su ficha completa.</div></div>`;
+      Pick a team in the <b>Team</b> filter to open its full page.</div></div>`;
     return;
   }
   const info = datosEquipos().find(e => e.equipo === eq);
-  if(!info){ libre.innerHTML = '<div class="panel"><div class="selector">Sin datos con estos filtros.</div></div>'; return; }
+  if(!info){ libre.innerHTML = '<div class="panel"><div class="selector">No data with these filters.</div></div>'; return; }
 
   const roster = datosJugadores().filter(j => j.equipo === eq).sort((a,b) => b.minTot - a.minTot);
   const maxPmRoster = Math.max(1, ...roster.map(j => Math.abs(j.pm)));
@@ -703,7 +776,7 @@ function pintarFicha(){
     const rival = local ? g.visita : g.local;
     return `<tr><td class="txt">${g.fecha}</td>
       <td class="txt">${local ? 'vs' : '@'} <span class="equipo eqlink" data-eq="${rival}">${rival}</span></td>
-      <td style="color:${pf > pc ? 'var(--verde)' : 'var(--neg)'}">${pf > pc ? 'G' : 'P'}</td>
+      <td style="color:${pf > pc ? 'var(--verde)' : 'var(--neg)'}">${pf > pc ? 'W' : 'L'}</td>
       <td>${pf}-${pc}</td>
       ${celdaPM(pf-pc, maxMargen)}</tr>`;
   }).join('');
@@ -712,32 +785,32 @@ function pintarFicha(){
     <div class="ficha">
       <div><div class="cod">${info.equipo}</div><div class="nom">${esc(info.nombre)}</div></div>
       <div class="mets">
-        <div><b>${info.w}-${info.l}</b><span>Récord</span></div>
-        <div><b>${n1(info.ortg)}</b><span>Ataque</span></div>
-        <div><b>${n1(info.drtg)}</b><span>Defensa</span></div>
-        <div><b class="${info.net >= 0 ? 'pos':'neg2'}">${firma(info.net)}</b><span>Neto</span></div>
-        <div><b>${n1(info.pace)}</b><span>Ritmo</span></div>
+        <div><b>${info.w}-${info.l}</b><span>Record</span></div>
+        <div><b>${n1(info.ortg)}</b><span>Offense</span></div>
+        <div><b>${n1(info.drtg)}</b><span>Defense</span></div>
+        <div><b class="${info.net >= 0 ? 'pos':'neg2'}">${firma(info.net)}</b><span>Net</span></div>
+        <div><b>${n1(info.pace)}</b><span>Pace</span></div>
         <div><b>${n1(info.efg)}</b><span>eFG%</span></div>
       </div>
     </div>
     <div class="caja" style="margin-top:16px">
-      <h3>Roster · ordenado por minutos</h3>
+      <h3>Roster · sorted by minutes</h3>
       <div class="scroll" style="max-height:none"><table>
-        <thead><tr><th class="txt">Jugador</th><th class="txt">Rol ofensivo</th><th>J</th><th>MIN</th>
-          <th>PTS</th><th>REB</th><th>AST</th><th>TS%</th><th>USO%</th><th>+/-</th></tr></thead>
+        <thead><tr><th class="txt">Player</th><th class="txt">Offensive role</th><th>GP</th><th>MIN</th>
+          <th>PTS</th><th>REB</th><th>AST</th><th>TS%</th><th>USG%</th><th>+/-</th></tr></thead>
         <tbody>${filasRoster}</tbody></table></div>
     </div>
     <div class="rejilla">
       <div class="caja">
-        <h3>Quintetos más usados</h3>
+        <h3>Most-used lineups</h3>
         <div class="scroll" style="max-height:none"><table>
-          <thead><tr><th class="txt">Quinteto</th><th>J</th><th>MIN</th><th>ORtg</th><th>DRtg</th><th>+/-</th></tr></thead>
+          <thead><tr><th class="txt">Lineup</th><th>GP</th><th>MIN</th><th>ORtg</th><th>DRtg</th><th>+/-</th></tr></thead>
           <tbody>${filasQ}</tbody></table></div>
       </div>
       <div class="caja">
-        <h3>Calendario</h3>
+        <h3>Game log</h3>
         <div class="scroll" style="max-height:none"><table>
-          <thead><tr><th class="txt">Fecha</th><th class="txt">Rival</th><th>R</th><th>Marcador</th><th>Margen</th></tr></thead>
+          <thead><tr><th class="txt">Date</th><th class="txt">Opponent</th><th>W/L</th><th>Score</th><th>Margin</th></tr></thead>
           <tbody>${filasJ}</tbody></table></div>
       </div>
     </div>`;
@@ -756,17 +829,25 @@ function pintar(reiniciar){
   campoMin.style.display    = (v === 'jugadores' || v === 'quintetos') ? '' : 'none';
   campoMinJ.style.display   = (v === 'jugadores') ? '' : 'none';
   campoRol.style.display    = (v === 'jugadores' || v === 'liga') ? '' : 'none';
-  campoModo.style.display   = (v === 'juegos') ? 'none' : '';
-  campoTipo.style.display   = (esTabla && v !== 'juegos') ? '' : 'none';
+  campoModo.style.display   = (esTabla && fTipo.value !== 'roles') ? '' : 'none';
+  campoTipo.style.display   = esTabla ? '' : 'none';
   campoCalidad.style.display = (v === 'equipos' || v === 'liga') ? 'none' : '';
   campoRival.style.display  = (v === 'ficha') ? 'none' : '';
-  [campoSede, campoRes, campoUlt].forEach(c => c.style.display = (v === 'juegos' || v === 'liga') ? 'none' : '');
+  [campoSede, campoRes, campoUlt].forEach(c => c.style.display = (v === 'liga') ? 'none' : '');
 
   if(v === 'liga'){ pintarLiga(); enlazarEquipos(); return; }
   if(v === 'ficha'){ pintarFicha(); enlazarEquipos(); return; }
 
-  const datos = ({equipos:datosEquipos, jugadores:datosJugadores,
-                  quintetos:datosQuintetos, juegos:datosJuegos})[v]();
+  let datos = ({equipos:datosEquipos, jugadores:datosJugadores,
+                quintetos:datosQuintetos, juegos:datosJuegos})[v]();
+
+  if(v === 'jugadores' && fTipo.value === 'roles'){
+    const prom = promediosPorRol(datos);
+    datos = datos.filter(j => j.rol).map(j => ({...j,
+      tsDif:  isFinite(j.ts)   && prom[j.rol] ? j.ts   - prom[j.rol].ts   : NaN,
+      usgDif: isFinite(j.usg)  && prom[j.rol] ? j.usg  - prom[j.rol].usg  : NaN,
+      tparDif:isFinite(j.tpar) && prom[j.rol] ? j.tpar - prom[j.rol].tpar : NaN}));
+  }
 
   const [campo, dir] = S.orden[v];
   datos.sort((a,b) => {
@@ -778,25 +859,37 @@ function pintar(reiniciar){
 
   const paginas = Math.max(1, Math.ceil(datos.length / S.porPagina));
   if(S.pagina > paginas) S.pagina = paginas;
-  conteo.textContent = datos.length.toLocaleString('es-MX') + ' filas ·';
-  dePag.textContent = 'de ' + paginas;
+  conteo.textContent = datos.length.toLocaleString('en-US') + ' rows ·';
+  dePag.textContent = 'of ' + paginas;
   fPagina.innerHTML = Array.from({length:paginas}, (_,i) =>
     `<option value="${i+1}"${i+1 === S.pagina ? ' selected' : ''}>${i+1}</option>`).join('');
   bPrev.disabled = S.pagina <= 1; bNext.disabled = S.pagina >= paginas;
 
   aviso.hidden = true;
-  if(v === 'quintetos' && !fCalidad.value && S.incompletos){
+  if(fTipo.value === 'roles' && v !== 'juegos'){
     aviso.hidden = false;
-    aviso.innerHTML = `Quintetos reconstruidos desde el play-by-play oficial y validados contra el box score. ` +
-      `En ${S.incompletos} de ${S.juegos.length} juegos la fuente publica sustituciones incompletas y parte de ` +
-      `su tiempo no queda atribuida; puedes excluirlos con <b>Calidad de datos → Solo juegos completos</b>.`;
+    aviso.innerHTML = v === 'jugadores'
+      ? `Every player measured against the average of his own archetype: <b>+3.0 in TS% vs role</b> means three ` +
+        `points of efficiency above the other players with that same role. Only the ` +
+        `${Object.keys(S.roles).length} players with an assigned role appear here.`
+      : v === 'quintetos'
+      ? `<b>G-W-B</b> is the shape of the lineup: guards, wings and bigs. A <b>1-3-1</b> plays one creator with ` +
+        `three wings; a <b>2-1-2</b> is two guards and two bigs. The amber number flags players with no ` +
+        `assigned role.`
+      : `How each team splits its minutes between guards, wings and bigs, with the shooting efficiency of each ` +
+        `group. It shows which kind of player every coach trusts with the ball.`;
+  } else if(v === 'quintetos' && !fCalidad.value && S.incompletos){
+    aviso.hidden = false;
+    aviso.innerHTML = `Lineups reconstructed from the official play-by-play and validated against the box score. ` +
+      `In ${S.incompletos} of ${S.juegos.length} games the source publishes incomplete substitutions, so part of ` +
+      `their time is unattributed; exclude them with <b>Data quality → Complete games only</b>.`;
   }
 
-  const cols = COLS[v][v === 'juegos' ? 'trad' : fTipo.value];
+  const cols = COLS[v][fTipo.value] || COLS[v].trad;
   const pagina = datos.slice((S.pagina-1)*S.porPagina, S.pagina*S.porPagina);
 
   if(!datos.length){
-    salida.innerHTML = '<div class="vacio">Ninguna fila cumple estos filtros. Prueba a limpiarlos.</div>';
+    salida.innerHTML = '<div class="vacio">No rows match these filters. Try clearing them.</div>';
     return;
   }
 
